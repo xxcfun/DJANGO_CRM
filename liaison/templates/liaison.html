@@ -1,0 +1,116 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  <title>联系人列表</title>
+{% endblock %}
+
+{% block container %}
+      <blockquote class="layui-elem-quote">
+        <a href="">联系人记录</a>
+        &ensp;/&ensp;
+        <a href="">联系人列表</a>
+      </blockquote>
+
+      <!--按钮组-->
+      <form class="layui-form" action="." method="post">
+        <button type="button" class="layui-btn layui-btn-primary">全选</button>
+        <hr>
+        <div class="layui-form-item" pane>
+          <input type="text" name="title" required  lay-verify="required" placeholder="请输入联系人姓名或客户名称进行搜索" autocomplete="off" class="layui-input">
+        </div>
+      </form>
+
+      <table class="layui-table">
+        <colgroup>
+          <col width="5%">
+          <col>
+          <col>
+          <col>
+          <col>
+          <col>
+          <col>
+          <col>
+          <col width="10%">
+        </colgroup>
+        <thead>
+        <tr>
+          <th>选择</th>
+          <th>联系人姓名</th>
+          <th>客户名称</th>
+          <th>联系方式</th>
+          <th>职位</th>
+          <th>是否在职</th>
+          <th>创建时间</th>
+          <th>创建人</th>
+          <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!--数据-->
+        {% for item in liaison %}
+        <tr>
+          <td>
+            <input type="checkbox" name="" lay-skin="primary">
+          </td>
+          <td>
+            <a style="color: #01AAED" href="{% url 'liaison:liaison_detail' item.id %}">{{ item.name }}</a>
+          </td>
+          <td>
+            {{ item.customer }}
+          </td>
+          <td>
+            {{ item.phone }}
+          </td>
+          <td>
+            {{ item.get_job_display }}
+          </td>
+          <td>
+            {{ item.get_injob_display }}
+          </td>
+          <td>
+            {{ item.created_at }}
+          </td>
+          <td>
+            {{ item.user }}
+          </td>
+          <td>
+            <div class="layui-btn-group">
+              <a class="layui-btn layui-btn-sm layui-btn-normal" href="{% url 'liaison:liaison_detail' item.id %}">编辑</a>
+              <a class="layui-btn layui-btn-sm layui-btn-danger"
+                 onclick="return deleteLia();" href="{% url 'liaison:liaison_delete' item.id %}">删除</a>
+            </div>
+          </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+
+      <!--分页器-->
+      <div id="page" style="text-align: center"></div>
+{% endblock %}
+
+{% block footer %}
+  <script>
+    //JavaScript代码区域
+    layui.use(['element', 'laypage', 'form'], function(){
+      var element = layui.element
+      , laypage = layui.laypage
+      , form = layui.form;
+
+      // 执行一个page实例
+      laypage.render({
+        elem: 'page'
+        , count: 50  // 总数，服务器传来
+      });
+    });
+  </script>
+  <script type="text/javascript" language="JavaScript">
+    function deleteLia() {
+      if (confirm("确定要删除吗？")){
+          return true;
+      } else {
+          return false;
+      }
+    }
+  </script>
+{% endblock %}

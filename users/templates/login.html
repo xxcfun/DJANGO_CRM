@@ -1,0 +1,57 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>济南控创电子科技有限公司-CRM客户管理信息系统</title>
+  <link rel="stylesheet" href="/static/layui/css/layui.css"><!--引入layui文件，-->
+  <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body background="#666">
+<div class="login">
+  <form class="layui-form bg-blue" action="{% url 'users:login_view' %}?next={{ next_url }}" method="post">
+    <center><img style="margin-top: 100px;" src="/static/images/logo.png" width="250" alt=""></center>
+    <div style="text-align: center; margin-top: 50px; margin-bottom: 30px;">
+      <h2>济南控创电子科技有限公司 <br> CRM客户管理信息系统</h2>
+    </div>
+    <div class="layui-form-item margin-top-10">
+      <label class="layui-form-label">用户名
+        <i class="layui-icon">&#xe66f;</i>
+      </label>
+      <div class="layui-input-inline">
+        <!-- //采用inline表示可以继续放 -->
+        <input type="text" name="username" required lay-verify="username" placeholder="请输入用户名" autocomplete="off"
+               class="layui-input" lay-verType="msg" value="{{ form.username.value|default_if_none:'' }}">
+        {{ form.username.errors }}
+      </div>
+      <!-- <div class="layui-form-mid layui-word-aux"></div> -->
+    </div>
+    <div class="layui-form-item">
+      <label class="layui-form-label">密码
+        <i class="layui-icon"> &#xe672;</i>
+      </label>
+      <div class="layui-input-inline">
+        <input type="password" name="password" required lay-verify="userpassword" placeholder="请输入密码"
+               autocomplete="off" class="layui-input" value="">
+        {{ form.password.errors }}
+      </div>
+      <!-- <div class="layui-form-mid layui-word-aux"></div> -->
+    </div>
+    <div class="layui-form-item">
+      <div class="layui-input-block">
+        <button class="layui-btn" lay-submit lay-filter="login" type="submit">登录</button>
+        <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+      </div>
+    </div>
+  </form>
+</div>
+<script src="/static/layui/layui.js"></script>  <!--//--引入layui中的js文件 -->
+<script>
+    //Demo 拿到你所需要用的layui已经封装好的代码
+    layui.use(['form', 'layer'], function () {
+        var form = layui.form;//表单验证
+        var layer = layui.layer;
+    })
+</script>
+</body>
+</html>

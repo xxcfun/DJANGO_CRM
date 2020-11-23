@@ -1,0 +1,291 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  <title>首页-筛选-{{ user }}</title>
+{% endblock %}
+
+{% block container %}
+  <blockquote class="layui-elem-quote">
+    <a href="javascript:;">首页</a>
+    &ensp;/&ensp;
+    <a href="javascript:;">{{ user }}</a>
+  </blockquote>
+  <!--排名情况-->
+
+  <div class="layui-card">
+    <div class="layui-card-body">
+      <div class="layui-row">
+        <div class="layui-col-md8">
+          <h4 id="">{{ user }}的业务数据汇总</h4>
+          <table class="layui-table">
+            <colgroup>
+              <col>
+              <col>
+              <col>
+              <col>
+              <col>
+            </colgroup>
+            <thead>
+            <tr>
+              <th>姓名</th>
+              <th>新增客户</th>
+              <th>新增联系人</th>
+              <th>新增拜访记录</th>
+              <th>新增商机</th>
+              <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+{#            {% for count in counts %}#}
+            <tr>
+              <td>{{ user }}</td>
+              <td>{{ count.add_cus }}</td>
+              <td>{{ count.add_lia }}</td>
+              <td>{{ count.add_rec }}</td>
+              <td>{{ count.add_bus }}</td>
+              <td><a href="{% url 'index' %}" style="color: #1E9FFF">返回</a></td>
+            </tr>
+{#            {% endfor %}#}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  {#  <div class="layui-row layui-col-space10">#}
+  {##}
+  {#    <div class="layui-card layui-col-md5" style="margin-left: 10px;">#}
+  {#      <div class="layui-card-header">月拜访记录排行</div>#}
+  {#      <div class="layui-card-body" style="height: 300px">#}
+  {#        <div id="record" style="height: 300px"></div>#}
+  {#      </div>#}
+  {#    </div>#}
+  {#    <div class="layui-card layui-col-md5" style="margin-left: 10px;">#}
+  {#      <div class="layui-card-header">月开发商机排行</div>#}
+  {#      <div class="layui-card-body" style="height: 300px">#}
+  {#        <div id="business" style="height: 300px"></div>#}
+  {#      </div>#}
+  {#    </div>#}
+  {##}
+  {#  </div>#}
+  <hr>
+
+  <!--客户一览-->
+  <div class="layui-row">
+    <blockquote class="layui-elem-quote">
+      所有客户
+    </blockquote>
+
+    <table class="layui-table">
+      <colgroup>
+        <col width="">
+        <col width="">
+        <col width="">
+        <col width="">
+        <col width="">
+        <col width="10%">
+        <col width="10%">
+      </colgroup>
+      <thead>
+      <tr>
+        <th>客户名称</th>
+        <th>客户级别</th>
+        <th>客户规模</th>
+        <th>客户行业</th>
+        <th>创建时间</th>
+        <th>负责人</th>
+        <th>操作</th>
+      </tr>
+      </thead>
+      <tbody>
+      {% for customer in customer_list %}
+        <tr>
+          <td>
+            <a style="color: #1E9FFF" href="{% url 'customer:customer_detail' customer.id %}">
+              {{ customer.name }}
+            </a>
+          </td>
+          <td>
+            {{ customer.get_rank_display }}
+          </td>
+          <td>
+            {{ customer.get_scale_display }}
+          </td>
+          <td>
+            {{ customer.industry|default_if_none:'' }}
+          </td>
+          <td>
+            {{ customer.created_at }}
+          </td>
+          <td>{{ customer.user }}</td>
+          <td>
+            <div class="layui-btn-group">
+              <a class="layui-btn layui-btn-sm layui-btn-normal"
+                 href="{% url 'customer:customer_detail' customer.id %}">编辑</a>
+              <a class="layui-btn layui-btn-sm layui-btn-danger">删除</a>
+            </div>
+          </td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  <hr>
+  <!--客户结束-->
+
+  <!-- 联系人信息 -->
+  <div class="layui-row">
+    <blockquote class="layui-elem-quote">客户联系人信息</blockquote>
+    <table class="layui-table">
+      <colgroup>
+        <col width="20%">
+        <col width="20%">
+        <col width="14%">
+        <col width="13%">
+        <col width="13%">
+        <col width="10%">
+        <col width="10%">
+      </colgroup>
+      <thead>
+      <tr>
+        <th>联系人姓名</th>
+        <th>客户名称</th>
+        <th>联系方式</th>
+        <th>职位</th>
+        <th>是否在职</th>
+        <th>负责人</th>
+        <th>操作</th>
+      </tr>
+      </thead>
+      <tbody>
+      {% for liaison in liaison_list %}
+        <tr>
+          <td><a style="color: #1E9FFF" href="{% url 'liaison:liaison_detail' liaison.id %}">{{ liaison.name }}</a></td>
+          <td>{{ liaison.customer }}</td>
+          <td>{{ liaison.phone }}</td>
+          <td>{{ liaison.get_job_display }}</td>
+          <td>{{ liaison.get_injob_display }}</td>
+          <td>{{ liaison.user }}</td>
+          <td>
+            <div class="layui-btn-group">
+              <a class="layui-btn layui-btn-sm layui-btn-normal"
+                 href="{% url 'liaison:liaison_detail' liaison.id %}">编辑</a>
+              <a class="layui-btn layui-btn-sm layui-btn-danger">删除</a>
+            </div>
+          </td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  <hr>
+  <!-- 联系人信息结束 -->
+
+  <!-- 客户拜访记录 -->
+  <div class="layui-row">
+    <blockquote class="layui-elem-quote">客户拜访记录</blockquote>
+    <table class="layui-table">
+      <colgroup>
+        <col width="20%">
+        <col width="12%">
+        <col width="8%">
+        <col width="20%">
+        <col width="20%">
+        <col width="10%">
+        <col width="10%">
+      </colgroup>
+      <thead>
+      <tr>
+        <th>拜访客户</th>
+        <th>拜访时间</th>
+        <th>拜访方式</th>
+        <th>主要事宜</th>
+        <th>后续工作安排</th>
+        <th>负责人</th>
+        <th>操作</th>
+      </tr>
+      </thead>
+      <tbody>
+      {% for record in record_list %}
+        <tr>
+          <td><a style="color: #1E9FFF" href="{% url 'record:record_detail' record.id %}">{{ record.customer }}</a></td>
+          <td>{{ record.created_at|date:'Y年m月d日' }}</td>
+          <td>{{ record.status }}</td>
+          <td>{{ record.main|slice:":15" }}</td>
+          <td>{{ record.next|slice:":15" }}</td>
+          <td>{{ record.user }}</td>
+          <td>
+            <div class="layui-btn-group">
+              <a class="layui-btn layui-btn-sm layui-btn-normal"
+                 href="{% url 'record:record_detail' record.id %}">编辑</a>
+              <a class="layui-btn layui-btn-sm layui-btn-danger">删除</a>
+            </div>
+          </td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  <hr>
+  <!-- 客户拜访记录结束 -->
+
+  <!-- 客户商机 -->
+  <div class="layui-row">
+    <blockquote class="layui-elem-quote">客户商机</blockquote>
+
+    <table class="layui-table">
+      <colgroup>
+        <col width="25%">
+        <col width="25%">
+        <col width="15%">
+        <col width="15%">
+        <col width="10%">
+        <col width="10%">
+      </colgroup>
+      <thead>
+      <tr>
+        <th>商机名称</th>
+        <th>客户名称</th>
+        <th>赢单率</th>
+        <th>预估金额（万元）</th>
+        <th>负责人</th>
+        <th>操作</th>
+      </tr>
+      </thead>
+      <tbody>
+      {% for business in business_list %}
+        <tr>
+          <td><a style="color: #1E9FFF" href="{% url 'business:business_detail' business.id %}">{{ business.name }}</a>
+          </td>
+          <td>{{ business.customer }}</td>
+          <td>{{ business.get_winning_rate_display }}</td>
+          <td>{{ business.money|default_if_none:'' }}</td>
+          <td>{{ business.user }}</td>
+          <td>
+            <div class="layui-btn-group">
+              <a class="layui-btn layui-btn-sm layui-btn-normal"
+                 href="{% url 'business:business_detail' business.id %}">编辑</a>
+              <a class="layui-btn layui-btn-sm layui-btn-danger">删除</a>
+            </div>
+          </td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  <hr>
+  <!-- 客户商机结束 -->
+{% endblock %}
+
+{% block footer %}
+  <script src="/static/js/echarts.min.js"></script>
+  {# echarts配置信息 #}
+  <script type="text/javascript">
+  </script>
+  <script>
+      //JavaScript代码区域
+      layui.use(['element'], function () {
+          var element = layui.element;
+      });
+  </script>
+{% endblock %}

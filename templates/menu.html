@@ -1,0 +1,23 @@
+  <div class="layui-side layui-bg-black">
+    <div class="layui-side-scroll">
+      <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+      <ul class="layui-nav layui-nav-tree" lay-filter="test">
+        <!-- 侧边导航: <ul class="layui-nav layui-nav-tree layui-nav-side"> -->
+        <li class="layui-nav-item layui-nav-itemed">
+          <a href="javascript:;">首页</a>
+          <dl class="layui-nav-child">
+            <dd><a href="{% url 'index' %}">首页展板</a></dd>
+          </dl>
+        </li>
+        <li class="layui-nav-item layui-nav-itemed">
+          <a href="javascript:;">客户管理模块</a>
+          <dl class="layui-nav-child">
+            <dd><a href="{% url 'customer:customer_list' %}">客户记录</a></dd>
+            <dd><a href="{% url 'liaison:liaison_list' %}">联系人记录</a></dd>
+            <dd><a href="{% url 'record:record_list' %}">拜访记录</a></dd>
+            <dd><a href="{% url 'business:business_list' %}">商机记录</a></dd>
+          </dl>
+        </li>
+      </ul>
+    </div>
+  </div>
