@@ -13,3 +13,7 @@ CRM系统中存在的问题：
 * 商机产品问题
 * 添加联系人，商机，拜访记录问题
 * 导入导出功能
+* 按业务筛选的功能
+#### 11.24更新
+汇总需求，开始重构
+![Image text](https://raw.githubusercontent.com/hhdMrLion/photo-repository/master/crm%E7%B3%BB%E7%BB%9F%E6%94%B9%E7%89%88.png)
