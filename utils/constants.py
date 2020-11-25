@@ -36,7 +36,8 @@ INJOB_YES = 1
 INJOB_NO = 0
 INJOB_ITEMS = (
     (INJOB_YES, '在职'),
-    (INJOB_NO, '离职'),)
+    (INJOB_NO, '离职'),
+)
 
 """
 联系人职称
@@ -70,4 +71,20 @@ WINNING_ITEMS = (
     (WINNING_WUSHI, '50%'),
     (WINNING_BASHI, '80%'),
     (WINNING_DONE, '100%')
+)
+
+"""
+权限
+"""
+ROLE_YW = 1
+ROLE_ZG = 2
+ROLE_SW = 3
+ROLE_JL = 4
+ROLE_RS = 5
+USER_ROLE = (
+    (ROLE_YW, '业务'),
+    (ROLE_ZG, '主管'),
+    (ROLE_SW, '商务'),
+    (ROLE_JL, '经理'),
+    (ROLE_RS, '人事'),
 )

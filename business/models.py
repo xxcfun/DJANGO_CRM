@@ -37,7 +37,7 @@ class CustomerBusiness(models.Model):
     prod_price = models.FloatField('价格', max_length=64, blank=True, null=True)
 
     class Meta:
-        db_table = 'cus_business'
+        db_table = 'business'
         verbose_name = verbose_name_plural = "客户商机"
 
     def __str__(self):

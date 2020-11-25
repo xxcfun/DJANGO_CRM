@@ -11,7 +11,7 @@ class Status(models.Model):
     name = models.CharField('状态名称', max_length=22)
 
     class Meta:
-        db_table = 'cus_status'
+        db_table = 'rec_status'
         verbose_name = verbose_name_plural = "客户状态"
 
     def __str__(self):
@@ -31,7 +31,7 @@ class CustomerRecord(models.Model):
     is_valid = models.BooleanField('是否有效', default=True)
 
     class Meta:
-        db_table = 'cus_record'
+        db_table = 'record'
         verbose_name = verbose_name_plural = "客户拜访记录"
 
     def __str__(self):

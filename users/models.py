@@ -1,7 +1,24 @@
-from django.contrib.auth.models import User
 from django.db import models
 
 # Create your models here.
+from utils import constants
+
+
+class User(models.Model):
+    """用户"""
+    name = models.CharField('用户名', max_length=128, unique=True)
+    password = models.CharField('密码', max_length=256)
+    is_valid = models.BooleanField('是否有效', default=True)
+    created_time = models.DateTimeField('创建时间', auto_now_add=True)
+    power = models.SmallIntegerField('权限', choices=constants.USER_ROLE, default=constants.ROLE_YW)
+
+    class Meta:
+        ordering = ['-created_time']
+        verbose_name_plural = verbose_name = '用户'
+        db_table = 'user'
+
+    def __str__(self):
+        return self.name
 
 
 class Count(models.Model):
@@ -13,7 +30,7 @@ class Count(models.Model):
     add_rec = models.IntegerField('每日增加拜访记录数', default=0)
 
     class Meta:
-        db_table = 'counts'
+        db_table = 'user_counts'
         verbose_name = verbose_name_plural = '数据汇总'
 
     def __str__(self):
