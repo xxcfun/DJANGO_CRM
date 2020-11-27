@@ -4,8 +4,6 @@
   <meta charset="utf-8">
   <meta name="viewport" content="with=device-width, initial-scale=1, maximum-scale=1">
   <link rel="stylesheet" href="/static/layui/css/layui.css">
-  <script type="text/javascript"
-          src="https://api.map.baidu.com/api?v=2.0&ak=EHOvx8gGhZ2XGRCGEWWuMDq5xZPRnvMh"></script>
   {% block title %}
     <title>首页</title>
   {% endblock %}
@@ -24,19 +22,13 @@
       {#          <dd><a href="">添加联系人</a></dd>#}
       {#        </dl>#}
       {#      </li>#}
-      {% if user.is_authenticated %}
-        <li class="layui-nav-item">
-          <a href="javascript:;">
-            <img src="http://t.cn/RCzsdCq" class="layui-nav-img">
-            欢迎： {{ user.username }}.
-          </a>
-        </li>
-        <li class="layui-nav-item"><a href="{% url 'users:logout_view' %}">退出登录</a></li>
-      {% else %}
-        <li class="layui-nav-item">
-          <a href="{% url 'users:login' %}">登录</a>
-        </li>
-      {% endif %}
+      <li class="layui-nav-item">
+        <a href="{% url 'users:mine' %}">
+          <img src="http://t.cn/RCzsdCq" class="layui-nav-img">
+          欢迎： {{ request.session.user_name }}.
+        </a>
+      </li>
+      <li class="layui-nav-item"><a href="{% url 'users:logout' %}">退出登录</a></li>
     </ul>
   </div>
 

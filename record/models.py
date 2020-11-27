@@ -1,9 +1,8 @@
-from django.contrib.auth.models import User
 from django.db import models
 
 # Create your models here.
+from users.models import User
 from customer.models import Customer
-from utils import constants
 
 
 class Status(models.Model):

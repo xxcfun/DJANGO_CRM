@@ -16,13 +16,15 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 
-from kc_crm import views
+from users import views
 
 urlpatterns = [
     # 管理员后台
     url(r'^admin/', admin.site.urls),
-    # 首页
+    # 登录
     url(r'^$', views.index, name='index'),
+    # 首页
+    url(r'^home/', views.home, name='home'),
     # 用户模块
     url(r'^users/', include('users.urls', namespace='users')),
     # 客户模块

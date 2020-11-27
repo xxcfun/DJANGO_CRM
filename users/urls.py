@@ -5,9 +5,9 @@ from users import views
 
 urlpatterns = [
     # 登录
-    url(r'^login/$', views.login_view, name='login_view'),
+    url(r'^login/', views.login, name='login'),
     # 登出
-    url(r'^logout/$', views.logout_view, name='logout_view'),
-    # 看个人
-    url(r'^filter/(?P<pk>\d+)/$', views.index_filter, name='index_filter'),
+    url(r'^logout/', views.logout, name='logout'),
+    # 改密
+    url(r'^mine/', views.mine, name='mine'),
 ]

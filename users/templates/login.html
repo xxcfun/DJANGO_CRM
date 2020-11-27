@@ -9,33 +9,21 @@
 </head>
 <body background="#666">
 <div class="login">
-  <form class="layui-form bg-blue" action="{% url 'users:login_view' %}?next={{ next_url }}" method="post">
+  <form class="layui-form bg-blue" action="/users/login/" method="post">
     <center><img style="margin-top: 100px;" src="/static/images/logo.png" width="250" alt=""></center>
     <div style="text-align: center; margin-top: 50px; margin-bottom: 30px;">
       <h2>济南控创电子科技有限公司 <br> CRM客户管理信息系统</h2>
     </div>
     <div class="layui-form-item margin-top-10">
-      <label class="layui-form-label">用户名
-        <i class="layui-icon">&#xe66f;</i>
-      </label>
-      <div class="layui-input-inline">
-        <!-- //采用inline表示可以继续放 -->
-        <input type="text" name="username" required lay-verify="username" placeholder="请输入用户名" autocomplete="off"
-               class="layui-input" lay-verType="msg" value="{{ form.username.value|default_if_none:'' }}">
-        {{ form.username.errors }}
-      </div>
-      <!-- <div class="layui-form-mid layui-word-aux"></div> -->
+      <!-- //采用inline表示可以继续放 -->
+      {{ login_form.username.label_tag }}
+      {{ login_form.username }}
+      {{ message }}
     </div>
     <div class="layui-form-item">
-      <label class="layui-form-label">密码
-        <i class="layui-icon"> &#xe672;</i>
-      </label>
-      <div class="layui-input-inline">
-        <input type="password" name="password" required lay-verify="userpassword" placeholder="请输入密码"
-               autocomplete="off" class="layui-input" value="">
-        {{ form.password.errors }}
-      </div>
-      <!-- <div class="layui-form-mid layui-word-aux"></div> -->
+      {{ login_form.password.label_tag }}
+      {{ login_form.password }}
+      {{ message }}
     </div>
     <div class="layui-form-item">
       <div class="layui-input-block">
